@@ -1,4 +1,7 @@
 spring:
+  config:
+    import: optional:file:../.env[.properties]
+
   datasource:
     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:website_auditor}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: ${DB_USERNAME:auditor_dev}
