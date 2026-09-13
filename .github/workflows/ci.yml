@@ -27,10 +27,12 @@ jobs:
           MYSQL_USER: auditor
           MYSQL_PASSWORD: auditor_test_password
           MYSQL_ROOT_PASSWORD: root_test_password
+
         ports:
           - 3306:3306
+
         options: >-
-          --health-cmd="mysqladmin ping -h localhost -u root -proot_test_password"
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -u root -proot_test_password"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=10
@@ -41,6 +43,7 @@ jobs:
         working-directory: backend
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -54,20 +57,59 @@ jobs:
       - name: Make Maven wrapper executable
         run: chmod +x mvnw
 
+      - name: Wait for MySQL
+        env:
+          MYSQL_PWD: root_test_password
+        run: |
+          echo "Waiting for MySQL..."
+
+          for i in {1..30}; do
+            if mysqladmin ping \
+              -h 127.0.0.1 \
+              -P 3306 \
+              -u root \
+              --silent; then
+              echo "MySQL is ready."
+              exit 0
+            fi
+
+            echo "MySQL is not ready yet. Attempt $i/30..."
+            sleep 2
+          done
+
+          echo "MySQL failed to become ready."
+          exit 1
+
+      - name: Verify MySQL database
+        env:
+          MYSQL_PWD: auditor_test_password
+        run: |
+          mysql \
+            -h 127.0.0.1 \
+            -P 3306 \
+            -u auditor \
+            website_auditor \
+            -e "SELECT 1;"
+
       - name: Run backend tests
         env:
-          DB_URL: jdbc:mysql://localhost:3306/website_auditor?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+          DB_URL: jdbc:mysql://127.0.0.1:3306/website_auditor?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
           DB_USERNAME: auditor
           DB_PASSWORD: auditor_test_password
+
           JWT_SECRET: github-actions-test-secret-key-which-is-at-least-32-bytes-long
           JWT_ACCESS_TOKEN_EXPIRATION: 900000
+
           MAIL_HOST: localhost
           MAIL_PORT: 1025
           MAIL_USERNAME: test@example.com
           MAIL_PASSWORD: test-password
+
           FRONTEND_URL: http://localhost:5173
+
           AUDIT_ENGINE_URL: http://localhost:3001
           AUDIT_ENGINE_API_KEY: github-actions-audit-engine-test-key
+
         run: ./mvnw clean test
 
 
@@ -80,6 +122,7 @@ jobs:
         working-directory: backend/audit-engine
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -106,6 +149,7 @@ jobs:
       - audit-engine-test
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
