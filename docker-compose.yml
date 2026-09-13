@@ -1,0 +1,92 @@
+services:
+
+  mysql:
+    image: mysql:8.4
+    container_name: website-auditor-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-p${MYSQL_ROOT_PASSWORD}"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  audit-engine:
+    build:
+      context: ./backend/audit-engine
+      dockerfile: Dockerfile
+    container_name: website-auditor-audit-engine
+    restart: unless-stopped
+    environment:
+      PORT: 3001
+      AUDIT_ENGINE_API_KEY: ${AUDIT_ENGINE_API_KEY}
+    ports:
+      - "3001:3001"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:3001/health', res => process.exit(res.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: website-auditor-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      audit-engine:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+
+      DB_URL: jdbc:mysql://mysql:3306/${DB_NAME}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_ACCESS_TOKEN_EXPIRATION: ${JWT_ACCESS_TOKEN_EXPIRATION}
+
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+
+      FRONTEND_URL: ${FRONTEND_URL}
+
+      AUDIT_ENGINE_URL: http://audit-engine:3001
+      AUDIT_ENGINE_API_KEY: ${AUDIT_ENGINE_API_KEY}
+
+    ports:
+      - "3307:3306"
+
+volumes:
+  mysql_data:

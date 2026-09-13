@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: website-auditor
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+

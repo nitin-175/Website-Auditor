@@ -1,0 +1,44 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+**/*.local
+**/*.local.*
+
+# Local Spring configuration and credentials
+**/application-local.properties
+**/application-local.yml
+**/application-local.yaml
+*.pem
+*.key
+*.p12
+*.jks
+
+# Database exports, local data, and ad-hoc SQL
+/sql data test.sql
+*.dump
+*.dump.sql
+*.bak
+*.sqlite
+*.sqlite3
+*.db
+
+# Build output and dependencies
+**/target/
+**/node_modules/
+**/dist/
+**/build/
+
+# Logs and generated reports
+*.log
+logs/
+coverage/
+
+# IDE and OS files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
