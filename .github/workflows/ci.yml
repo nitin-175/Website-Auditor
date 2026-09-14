@@ -13,6 +13,13 @@ on:
       - master
       - develop
 
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
 
   backend-test:
@@ -69,6 +76,7 @@ jobs:
               -P 3306 \
               -u root \
               --silent; then
+
               echo "MySQL is ready."
               exit 0
             fi
