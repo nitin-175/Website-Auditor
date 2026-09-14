@@ -86,7 +86,7 @@ services:
       AUDIT_ENGINE_API_KEY: ${AUDIT_ENGINE_API_KEY}
 
     ports:
-      - "3307:3306"
+      - "8080:8080"
 
 volumes:
   mysql_data:
