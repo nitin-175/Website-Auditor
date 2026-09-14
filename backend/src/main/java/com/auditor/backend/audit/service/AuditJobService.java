@@ -27,7 +27,6 @@ public class AuditJobService {
 
     @Transactional
     public AuditJob createJob(Audit audit) {
-
         AuditJob job = new AuditJob();
 
         job.setAudit(audit);
@@ -47,12 +46,10 @@ public class AuditJobService {
 
     @Transactional
     public AuditJob startJob(AuditJob job) {
-
         String currentStatus = normalizeStatus(job.getStatus());
 
         if (!STATUS_PENDING.equals(currentStatus)
                 && !STATUS_FAILED.equals(currentStatus)) {
-
             throw new IllegalStateException(
                     "Job cannot be started from status: "
                             + job.getStatus()
@@ -61,7 +58,6 @@ public class AuditJobService {
 
         if (STATUS_FAILED.equals(currentStatus)
                 && !canRetry(job)) {
-
             throw new IllegalStateException(
                     "Job has reached the maximum number of attempts"
             );
@@ -76,7 +72,6 @@ public class AuditJobService {
         // Clear information from the previous execution.
         job.setCompletedAt(null);
         job.setErrorMessage(null);
-
         job.setUpdatedAt(now);
 
         return auditJobRepository.save(job);
@@ -84,11 +79,9 @@ public class AuditJobService {
 
     @Transactional
     public AuditJob completeJob(AuditJob job) {
-
         String currentStatus = normalizeStatus(job.getStatus());
 
         if (!STATUS_RUNNING.equals(currentStatus)) {
-
             throw new IllegalStateException(
                     "Job cannot be completed from status: "
                             + job.getStatus()
@@ -112,7 +105,6 @@ public class AuditJobService {
         String currentStatus = normalizeStatus(job.getStatus());
 
         if (!STATUS_RUNNING.equals(currentStatus)) {
-
             throw new IllegalStateException(
                     "Job cannot be failed from status: "
                             + job.getStatus()
@@ -131,7 +123,6 @@ public class AuditJobService {
 
     @Transactional(readOnly = true)
     public AuditJob getJob(Audit audit) {
-
         return auditJobRepository.findByAudit(audit)
                 .orElseThrow(() ->
                         new IllegalArgumentException(
@@ -140,7 +131,6 @@ public class AuditJobService {
     }
 
     public boolean canRetry(AuditJob job) {
-
         if (job == null) {
             return false;
         }
@@ -152,7 +142,6 @@ public class AuditJobService {
     }
 
     public boolean hasReachedMaxAttempts(AuditJob job) {
-
         if (job == null) {
             return false;
         }
@@ -165,7 +154,6 @@ public class AuditJobService {
     }
 
     private String normalizeStatus(String status) {
-
         if (status == null) {
             throw new IllegalStateException(
                     "Job status cannot be null"
