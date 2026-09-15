@@ -35,9 +35,7 @@ const userService = {
    * Delete the current account.
    */
   async deleteAccount() {
-    const response = await api.delete(
-      "/users/me"
-    );
+    const response = await api.delete("/user/profile");
 
     return response.data;
   },

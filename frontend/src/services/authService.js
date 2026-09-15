@@ -63,6 +63,8 @@ const authService = {
           refreshToken,
         });
       }
+    } catch {
+      return;
     } finally {
       localStorage.removeItem(
         "accessToken"

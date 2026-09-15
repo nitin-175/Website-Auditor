@@ -9,72 +9,65 @@ function WhyUseAuditor() {
   ];
 
   return (
-    <section className="bg-white py-20 sm:py-24">
-      <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
-        {/* Visual */}
-        <div className="relative">
-          <div className="absolute -inset-5 rounded-[2rem] bg-gradient-to-br from-[#ede9fe] via-transparent to-[#fce7f3] blur-xl" />
+    <section className="border-t border-[#dedbd1] bg-white py-20 sm:py-24">
+      <div className="mx-auto grid w-full max-w-[1200px] items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
+        <div className="rounded-[28px] border border-[#dedbd1] bg-[#fbfaf5] p-5 shadow-[0_14px_40px_rgba(23,32,51,0.06)]">
+          <div className="rounded-2xl border border-[#dedbd1] bg-white p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#96948d]">
+                  Website audit
+                </p>
 
-          <div className="relative overflow-hidden rounded-3xl border border-[#eeeafd] bg-[#faf9ff] p-6 shadow-xl shadow-[#7c3aed]/5">
-            {/* Fake audit preview */}
-            <div className="rounded-2xl border border-[#eeeafd] bg-white p-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs text-gray-400">
-                    Website Audit
+                <p className="mt-1 text-sm font-extrabold text-[#172033]">
+                  example.com
+                </p>
+              </div>
+
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#eaf8f5] text-sm font-extrabold text-[#168f82]">
+                92
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                ["Performance", "94"],
+                ["Accessibility", "91"],
+                ["Best Practices", "93"],
+                ["SEO", "90"],
+              ].map(([label, score]) => (
+                <div
+                  key={label}
+                  className="rounded-xl bg-[#f7f6f0] p-3"
+                >
+                  <p className="text-[10px] leading-4 text-[#96948d]">
+                    {label}
                   </p>
 
-                  <p className="mt-1 text-sm font-bold text-[#181827]">
-                    example.com
+                  <p className="mt-1 text-lg font-extrabold text-[#172033]">
+                    {score}
                   </p>
                 </div>
+              ))}
+            </div>
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ecfdf5] text-sm font-bold text-emerald-600">
-                  92
-                </div>
-              </div>
-
-              <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                {[
-                  ["Performance", "94"],
-                  ["Accessibility", "91"],
-                  ["Best Practices", "93"],
-                  ["SEO", "90"],
-                ].map(([label, score]) => (
-                  <div
-                    key={label}
-                    className="rounded-xl bg-[#faf9ff] p-3"
-                  >
-                    <p className="text-[10px] leading-4 text-gray-400">
-                      {label}
-                    </p>
-
-                    <p className="mt-1 text-lg font-bold text-[#181827]">
-                      {score}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-4 h-2 overflow-hidden rounded-full bg-[#eeeafd]">
-                <div className="h-full w-[92%] rounded-full bg-gradient-to-r from-[#7c3aed] to-[#db2777]" />
-              </div>
+            <div className="mt-4 h-2 overflow-hidden rounded-full bg-[#e8e6df]">
+              <div className="h-full w-[92%] rounded-full bg-[#19a999]" />
             </div>
           </div>
         </div>
 
-        {/* Content */}
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#f3e8ff] px-3 py-1.5 text-xs font-semibold text-[#7c3aed]">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#eef0ff] px-3 py-1.5 text-xs font-bold text-[#4f46e5]">
             <Zap size={14} />
             Built for clear insights
           </div>
 
-          <h2 className="mt-5 text-3xl font-bold tracking-tight text-[#181827] sm:text-4xl">
-            Turn Website Problems Into Actionable Improvements
+          <h2 className="mt-5 max-w-xl text-3xl font-extrabold tracking-[-0.03em] text-[#172033] sm:text-4xl">
+            Turn website problems into actionable improvements.
           </h2>
 
-          <p className="mt-5 text-sm leading-7 text-gray-500 sm:text-base">
+          <p className="mt-5 max-w-xl text-sm leading-7 text-[#6a6963] sm:text-base">
             Instead of searching through complex audit output, get
             important findings presented in a clear and structured way.
           </p>
@@ -87,10 +80,10 @@ function WhyUseAuditor() {
               >
                 <CheckCircle2
                   size={19}
-                  className="mt-0.5 shrink-0 text-emerald-500"
+                  className="mt-0.5 shrink-0 text-[#19a999]"
                 />
 
-                <p className="text-sm leading-6 text-gray-600">
+                <p className="text-sm leading-6 text-[#4f4e49]">
                   {point}
                 </p>
               </div>

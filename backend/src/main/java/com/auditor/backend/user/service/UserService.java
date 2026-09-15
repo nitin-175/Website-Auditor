@@ -49,6 +49,11 @@ public class UserService {
     }
 
     @Transactional
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
+
+    @Transactional
     public void changePassword(
             User user,
             String currentPassword,

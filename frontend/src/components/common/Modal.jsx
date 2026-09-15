@@ -23,10 +23,7 @@ function Modal({
     document.addEventListener("keydown", handleEscape);
 
     return () => {
-      document.removeEventListener(
-        "keydown",
-        handleEscape
-      );
+      document.removeEventListener("keydown", handleEscape);
     };
   }, [isOpen, onClose]);
 
@@ -35,14 +32,12 @@ function Modal({
       return;
     }
 
-    const originalOverflow =
-      document.body.style.overflow;
+    const originalOverflow = document.body.style.overflow;
 
     document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow =
-        originalOverflow;
+      document.body.style.overflow = originalOverflow;
     };
   }, [isOpen]);
 
@@ -67,20 +62,20 @@ function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 px-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#172033]/45 px-4"
       onMouseDown={handleOverlayClick}
       role="presentation"
     >
       <div
-        className={`w-full ${sizes[size]} overflow-hidden rounded-xl border border-[#eeeafd] bg-white shadow-2xl`}
+        className={`w-full ${sizes[size]} overflow-hidden rounded-2xl border border-[#e7e5df] bg-white shadow-xl`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
-        <div className="flex items-center justify-between border-b border-[#eeeafd] px-5 py-4">
+        <div className="flex items-center justify-between border-b border-[#e7e5df] px-5 py-4">
           <h2
             id="modal-title"
-            className="text-lg font-bold text-[#181827]"
+            className="text-lg font-bold text-[#172033]"
           >
             {title}
           </h2>
@@ -88,7 +83,7 @@ function Modal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-1.5 text-gray-400 transition hover:bg-[#f5f3ff] hover:text-[#7c3aed]"
+            className="rounded-lg p-1.5 text-[#9a9891] transition hover:bg-[#f6f4ed] hover:text-[#4f46e5]"
             aria-label="Close modal"
           >
             <X size={20} />

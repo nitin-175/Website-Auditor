@@ -1,5 +1,4 @@
 import {
-  /*BarChart3,*/
   ChevronLeft,
   ChevronRight,
   Clock3,
@@ -41,12 +40,11 @@ function Sidebar({ collapsed = false, onToggle }) {
 
   return (
     <aside
-      className={`relative hidden min-h-[calc(100vh-64px)] border-r border-[#eeeafd] bg-white transition-all duration-300 lg:block ${
-        collapsed ? "w-20" : "w-60"
+      className={`relative hidden min-h-[calc(100vh-70px)] border-r border-[#e7e5df] bg-[#fbfaf5] transition-all duration-300 lg:block ${
+        collapsed ? "w-[76px]" : "w-[224px]"
       }`}
     >
-      {/* Navigation */}
-      <nav className="flex flex-col gap-2 p-4">
+      <nav className="flex flex-col gap-1.5 p-4">
         {navigationItems.map((item) => {
           const Icon = item.icon;
 
@@ -56,32 +54,39 @@ function Sidebar({ collapsed = false, onToggle }) {
               to={item.to}
               title={collapsed ? item.label : undefined}
               className={({ isActive }) =>
-                `group flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-all ${
+                `group relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition ${
                   isActive
-                    ? "bg-linear-to-r from-[#7c3aed] to-[#db2777] text-white shadow-sm"
-                    : "text-gray-500 hover:bg-[#f7f3ff] hover:text-[#7c3aed]"
+                    ? "bg-[#eef0ff] text-[#4f46e5]"
+                    : "text-[#6a6963] hover:bg-[#f0eee7] hover:text-[#172033]"
                 } ${collapsed ? "justify-center" : ""}`
               }
             >
-              <Icon size={17} strokeWidth={2} />
+              {({ isActive }) => (
+                <>
+                  {isActive && (
+                    <span className="absolute left-0 h-5 w-0.5 rounded-full bg-[#4f46e5]" />
+                  )}
 
-              {!collapsed && <span>{item.label}</span>}
+                  <Icon size={18} strokeWidth={1.8} />
+
+                  {!collapsed && <span>{item.label}</span>}
+                </>
+              )}
             </NavLink>
           );
         })}
       </nav>
 
-      {/* Collapse Button */}
       <button
         type="button"
         onClick={onToggle}
-        className="absolute -right-3 top-5 hidden h-6 w-6 items-center justify-center rounded-full border border-[#e9e4fa] bg-white text-gray-500 shadow-sm transition hover:text-[#7c3aed] lg:flex"
+        className="absolute -right-3 top-5 hidden h-6 w-6 items-center justify-center rounded-full border border-[#d8d5ca] bg-white text-[#65645f] shadow-sm transition hover:border-[#4f46e5] hover:text-[#4f46e5] lg:flex"
         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
       >
         {collapsed ? (
-          <ChevronRight size={14} />
+          <ChevronRight size={13} />
         ) : (
-          <ChevronLeft size={14} />
+          <ChevronLeft size={13} />
         )}
       </button>
     </aside>

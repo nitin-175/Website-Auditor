@@ -1,4 +1,4 @@
-import { ArrowRight, FileSearch, Globe2, LineChart } from "lucide-react";
+import { FileSearch, Globe2, LineChart } from "lucide-react";
 
 function HowItWorks() {
   const steps = [
@@ -7,19 +7,19 @@ function HowItWorks() {
       icon: Globe2,
       title: "Enter a URL",
       description:
-        "Enter the website you want to analyze in the audit field.",
+        "Enter the website you want to analyze.",
     },
     {
       number: "02",
       icon: FileSearch,
-      title: "Run the Audit",
+      title: "Run the audit",
       description:
-        "Our audit engine analyzes the website across multiple quality categories.",
+        "The audit engine analyzes your site across the key quality categories.",
     },
     {
       number: "03",
       icon: LineChart,
-      title: "Understand the Results",
+      title: "Understand the results",
       description:
         "Review scores, Core Web Vitals, issues and recommendations in one report.",
     },
@@ -28,53 +28,51 @@ function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="bg-[#faf9ff] py-20 sm:py-24"
+      className="bg-[#f6f4ed] py-20 sm:py-24"
     >
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#8b5cf6]">
+      <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8">
+        <div className="max-w-2xl">
+          <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#4f46e5]">
             How it works
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#181827] sm:text-4xl">
-            From URL to Insights
+          <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.03em] text-[#172033] sm:text-4xl">
+            From URL to useful insights.
           </h2>
 
-          <p className="mt-4 text-sm leading-6 text-gray-500 sm:text-base">
-            Get useful website insights through a simple audit workflow.
+          <p className="mt-4 text-sm leading-6 text-[#6a6963] sm:text-base">
+            A simple workflow that turns a website into a prioritized
+            action plan.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
-          {steps.map((step, index) => {
+        <div className="mt-12 grid gap-8 md:grid-cols-3">
+          {steps.map((step) => {
             const Icon = step.icon;
 
             return (
-              <div
+              <article
                 key={step.number}
-                className="relative text-center"
+                className="relative border-t-2 border-[#d8d5ca] pt-6"
               >
-                {/* Connector */}
-                {index < steps.length - 1 && (
-                  <div className="absolute left-[calc(50%+60px)] right-[calc(-50%+60px)] top-8 hidden h-px bg-[#ddd6fe] md:block" />
-                )}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-extrabold tracking-[0.16em] text-[#a09e96]">
+                    {step.number}
+                  </span>
 
-                <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#db2777] text-white shadow-lg shadow-[#7c3aed]/15">
-                  <Icon size={25} />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#172033] text-white">
+                    <Icon size={18} strokeWidth={1.8} />
+                  </div>
                 </div>
 
-                <p className="mt-5 text-xs font-bold tracking-widest text-[#a78bfa]">
-                  {step.number}
-                </p>
-
-                <h3 className="mt-2 text-lg font-bold text-[#181827]">
+                <h3 className="mt-6 text-lg font-extrabold text-[#172033]">
                   {step.title}
                 </h3>
 
-                <p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-gray-500">
+                <p className="mt-2 max-w-sm text-sm leading-6 text-[#6a6963]">
                   {step.description}
                 </p>
-              </div>
+              </article>
             );
           })}
         </div>

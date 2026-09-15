@@ -15,8 +15,8 @@ function Spinner({
         animate-spin
         rounded-full
         border-2
-        border-[#ddd6fe]
-        border-t-[#7c3aed]
+        border-[#e7e5df]
+        border-t-[#4f46e5]
         ${sizes[size]}
         ${className}
       `}

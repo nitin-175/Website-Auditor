@@ -1,40 +1,38 @@
-import { Link } from "react-router";
 import { ArrowLeft, SearchX } from "lucide-react";
+import { Link } from "react-router";
 
 function NotFound() {
   return (
-    <div className="min-h-screen bg-[#faf9ff] px-5 py-10">
-      <div className="mx-auto flex min-h-[80vh] max-w-xl items-center justify-center">
-        <div className="w-full rounded-2xl border border-[#eeeafd] bg-white p-7 text-center shadow-sm sm:p-10">
-          {/* Icon */}
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#f3e8ff] text-[#7c3aed]">
-            <SearchX size={30} />
-          </div>
+    <div className="flex min-h-screen items-center justify-center bg-[#f6f4ed] px-5 py-8">
+      <div className="w-full max-w-md rounded-2xl border border-[#e7e5df] bg-white p-7 text-center shadow-sm sm:p-9">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[#eef2ff] text-[#4f46e5]">
+          <SearchX size={23} />
+        </div>
 
-          {/* Error code */}
-          <p className="mt-7 text-6xl font-extrabold tracking-tight text-[#7c3aed] sm:text-7xl">
-            404
-          </p>
+        <p className="mt-5 text-5xl font-extrabold tracking-tight text-[#4f46e5]">
+          404
+        </p>
 
-          <h1 className="mt-4 text-xl font-bold text-[#181827] sm:text-2xl">
-            Page Not Found
-          </h1>
+        <h1 className="mt-3 text-xl font-bold text-[#172033]">
+          Page Not Found
+        </h1>
 
-          <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-gray-500">
-            The page you're looking for doesn't exist or may
-            have been moved to another location.
-          </p>
+        <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-[#6b7280]">
+          The page you're looking for doesn't exist or may have been moved.
+        </p>
 
-          {/* Action */}
-          <div className="mt-7">
-            <Link
-              to="/app"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#7c3aed] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#6d28d9]"
-            >
-              <ArrowLeft size={16} />
-              Back to Dashboard
-            </Link>
-          </div>
+        <Link
+          to="/app"
+          className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#4f46e5] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#4338ca]"
+        >
+          <ArrowLeft size={15} />
+          Back to Dashboard
+        </Link>
+
+        <div className="mt-6 flex justify-center gap-1.5">
+          <span className="h-1.5 w-7 rounded-full bg-[#4f46e5]" />
+          <span className="h-1.5 w-4 rounded-full bg-[#19a999]" />
+          <span className="h-1.5 w-2 rounded-full bg-[#f06f61]" />
         </div>
       </div>
     </div>

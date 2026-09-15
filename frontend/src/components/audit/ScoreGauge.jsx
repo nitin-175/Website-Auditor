@@ -2,34 +2,35 @@ function getScoreStatus(score) {
   if (score >= 90) {
     return {
       label: "Excellent",
-      text: "text-emerald-600",
-      track: "border-emerald-100",
-      ring: "border-emerald-500",
+      text: "text-[#168f82]",
+      border: "border-[#19a999]",
+      track: "border-[#c9e8e3]",
+      background: "bg-[#f3fbf9]",
     };
   }
 
   if (score >= 70) {
     return {
       label: "Needs Improvement",
-      text: "text-amber-600",
-      track: "border-amber-100",
-      ring: "border-amber-500",
+      text: "text-[#a07819]",
+      border: "border-[#d59a20]",
+      track: "border-[#ead8a7]",
+      background: "bg-[#fffaf0]",
     };
   }
 
   return {
-    label: "Poor",
-    text: "text-red-600",
-    track: "border-red-100",
-    ring: "border-red-500",
+    label: "Needs Attention",
+    text: "text-[#d65347]",
+    border: "border-[#e56a5d]",
+    track: "border-[#f1c7c2]",
+    background: "bg-[#fff8f6]",
   };
 }
 
-function ScoreGauge({
-  score,
-  size = "medium",
-}) {
-  const status = getScoreStatus(score);
+function ScoreGauge({ score = 0, size = "medium" }) {
+  const safeScore = Math.min(Math.max(Number(score) || 0, 0), 100);
+  const status = getScoreStatus(safeScore);
 
   const sizes = {
     small: {
@@ -37,13 +38,11 @@ function ScoreGauge({
       score: "text-lg",
       border: "border-4",
     },
-
     medium: {
       wrapper: "h-24 w-24",
       score: "text-2xl",
       border: "border-4",
     },
-
     large: {
       wrapper: "h-32 w-32",
       score: "text-4xl",
@@ -51,46 +50,29 @@ function ScoreGauge({
     },
   };
 
-  const selectedSize =
-    sizes[size] || sizes.medium;
+  const selectedSize = sizes[size] || sizes.medium;
 
   return (
     <div className="flex flex-col items-center">
       <div
-        className={`
-          flex
-          items-center
-          justify-center
-          rounded-full
-          ${selectedSize.wrapper}
-          ${selectedSize.border}
-          ${status.track}
-          bg-white
-          relative
-        `}
+        className={`relative flex items-center justify-center rounded-full ${selectedSize.wrapper} ${selectedSize.border} ${status.track} ${status.background}`}
       >
         <div
-          className={`
-            absolute
-            inset-0
-            rounded-full
-            border-transparent
-            ${selectedSize.border}
-          `}
+          className={`absolute inset-0 rounded-full ${selectedSize.border} ${status.border}`}
           style={{
-            clipPath: `inset(0 ${100 - score}% 0 0)`,
+            clipPath: `inset(0 ${100 - safeScore}% 0 0)`,
           }}
         />
 
         <span
-          className={`font-extrabold tracking-tight ${selectedSize.score} ${status.text}`}
+          className={`font-extrabold tracking-[-0.04em] ${selectedSize.score} ${status.text}`}
         >
-          {score}
+          {Math.round(safeScore)}
         </span>
       </div>
 
       <span
-        className={`mt-2 text-xs font-semibold ${status.text}`}
+        className={`mt-2 text-xs font-extrabold ${status.text}`}
       >
         {status.label}
       </span>

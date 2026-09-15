@@ -8,7 +8,7 @@ function Skeleton({
     <div
       className={`
         animate-pulse
-        bg-[#e9e4f7]
+        bg-[#e9e7df]
         ${width}
         ${height}
         ${rounded}

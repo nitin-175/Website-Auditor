@@ -1,3 +1,8 @@
+import {
+  ArrowRight,
+  CheckCircle2,
+  UserRound,
+} from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 
@@ -63,6 +68,7 @@ function RegisterForm() {
         "verificationEmail",
         formData.email
       );
+
       navigate("/verify-email");
     } catch (requestError) {
       setError(
@@ -73,22 +79,27 @@ function RegisterForm() {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <div className="text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-[#7c3aed] to-[#db2777] text-white shadow-md">
-          <span className="text-lg font-bold">A</span>
+    <div className="w-full max-w-[460px]">
+      <div className="mb-8">
+        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff0ed] text-[#e86b5d]">
+          <UserRound size={21} strokeWidth={1.8} />
         </div>
 
-        <h1 className="mt-5 text-2xl font-bold tracking-tight text-[#181827]">
-          Create Your Account
+        <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#4f46e5]">
+          Get started
+        </p>
+
+        <h1 className="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#172033] sm:text-4xl">
+          Create your account.
         </h1>
 
-        <p className="mt-2 text-sm text-gray-500">
-          Start auditing websites with AuditPro.
+        <p className="mt-3 max-w-md text-sm leading-6 text-[#6a6963] sm:text-base">
+          Start auditing websites with clear scores,
+          useful findings and practical recommendations.
         </p>
       </div>
 
-      <div className="mt-8 rounded-2xl border border-[#eeeafd] bg-white p-6 shadow-lg shadow-[#7c3aed]/5 sm:p-8">
+      <div className="rounded-[24px] border border-[#dedbd1] bg-white p-6 shadow-[0_14px_40px_rgba(23,32,51,0.06)] sm:p-8">
         {error && (
           <ErrorMessage
             message={error}
@@ -96,10 +107,7 @@ function RegisterForm() {
           />
         )}
 
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-5"
-        >
+        <form onSubmit={handleSubmit} className="space-y-5">
           <Input
             label="Full Name"
             name="name"
@@ -139,7 +147,18 @@ function RegisterForm() {
             required
           />
 
-          <p className="text-xs leading-5 text-gray-400">
+          <div className="flex items-start gap-2.5 rounded-xl bg-[#f7f6f0] p-3.5">
+            <CheckCircle2
+              size={16}
+              className="mt-0.5 shrink-0 text-[#19a999]"
+            />
+
+            <p className="text-xs leading-5 text-[#77756e]">
+              Use at least 8 characters for your password.
+            </p>
+          </div>
+
+          <p className="text-xs leading-5 text-[#96948d]">
             By creating an account, you agree to our Terms and
             Privacy Policy.
           </p>
@@ -149,15 +168,18 @@ function RegisterForm() {
             fullWidth
             size="large"
           >
-            Create Account
+            <span className="inline-flex items-center justify-center gap-2">
+              Create Account
+              <ArrowRight size={16} />
+            </span>
           </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
+        <p className="mt-6 text-center text-sm text-[#6a6963]">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="font-semibold text-[#7c3aed] hover:text-[#6d28d9]"
+            className="font-bold text-[#4f46e5] transition hover:text-[#3730a3]"
           >
             Sign in
           </Link>

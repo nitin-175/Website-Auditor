@@ -11,10 +11,10 @@ function ErrorMessage({
         flex
         items-start
         gap-3
-        rounded-lg
+        rounded-xl
         border
-        border-red-100
-        bg-red-50
+        border-[#f6d5d0]
+        bg-[#fff7f5]
         p-4
         ${className}
       `}
@@ -22,17 +22,17 @@ function ErrorMessage({
     >
       <AlertCircle
         size={18}
-        className="mt-0.5 shrink-0 text-red-500"
+        className="mt-0.5 shrink-0 text-[#f06f61]"
       />
 
       <div>
         {title && (
-          <p className="text-sm font-semibold text-red-700">
+          <p className="text-sm font-semibold text-[#172033]">
             {title}
           </p>
         )}
 
-        <p className="text-sm text-red-600">
+        <p className="text-sm leading-5 text-[#8a5a55]">
           {message}
         </p>
       </div>

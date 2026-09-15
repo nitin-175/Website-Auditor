@@ -1,32 +1,30 @@
-function SeverityBadge({
-  severity,
-}) {
+function SeverityBadge({ severity }) {
+  const normalizedSeverity = String(severity || "LOW").toUpperCase();
+
   const styles = {
-    high: {
+    CRITICAL: {
+      label: "Critical",
+      classes: "bg-[#ffe8e5] text-[#c84438] border-[#f1c7c2]",
+    },
+    HIGH: {
       label: "High",
-      classes:
-        "bg-red-50 text-red-600 border-red-100",
+      classes: "bg-[#fff0ed] text-[#d65347] border-[#f1c7c2]",
     },
-
-    medium: {
+    MEDIUM: {
       label: "Medium",
-      classes:
-        "bg-amber-50 text-amber-600 border-amber-100",
+      classes: "bg-[#fff6df] text-[#a07819] border-[#ead8a7]",
     },
-
-    low: {
+    LOW: {
       label: "Low",
-      classes:
-        "bg-blue-50 text-blue-600 border-blue-100",
+      classes: "bg-[#e9f8f5] text-[#168f82] border-[#c9e8e3]",
     },
   };
 
-  const current =
-    styles[severity] || styles.low;
+  const current = styles[normalizedSeverity] || styles.LOW;
 
   return (
     <span
-      className={`inline-flex shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-bold ${current.classes}`}
+      className={`inline-flex shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-extrabold ${current.classes}`}
     >
       {current.label}
     </span>

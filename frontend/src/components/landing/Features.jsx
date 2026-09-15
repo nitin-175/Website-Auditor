@@ -2,7 +2,6 @@ import {
   Accessibility,
   Gauge,
   SearchCheck,
-  Sparkles,
   ShieldCheck,
 } from "lucide-react";
 
@@ -10,77 +9,72 @@ function Features() {
   const features = [
     {
       icon: Gauge,
-      title: "Performance",
-      description:
-        "Measure loading performance and understand the metrics affecting your website experience.",
+      title: "Speed",
+      description: "Find the bottlenecks slowing your website down.",
+      className: "bg-[#eef0ff] text-[#4f46e5]",
     },
     {
       icon: Accessibility,
       title: "Accessibility",
-      description:
-        "Identify accessibility issues and make your website easier to use for everyone.",
+      description: "Catch barriers that make your site harder to use.",
+      className: "bg-[#fff0ed] text-[#e86b5d]",
     },
     {
       icon: SearchCheck,
       title: "SEO",
-      description:
-        "Find SEO-related issues that can affect how your website is discovered and indexed.",
+      description: "Find opportunities to improve discovery and visibility.",
+      className: "bg-[#eef0ff] text-[#4f46e5]",
     },
     {
       icon: ShieldCheck,
       title: "Best Practices",
-      description:
-        "Detect technical issues and recommendations that can improve website quality.",
-    },
-    {
-      icon: Sparkles,
-      title: "AI Insights",
-      description:
-        "Turn audit findings into practical recommendations that are easier to understand and act on.",
+      description: "Reduce technical risk with practical recommendations.",
+      className: "bg-[#eaf8f5] text-[#168f82]",
     },
   ];
 
   return (
     <section
       id="features"
-      className="bg-white py-20 sm:py-24"
+      className="border-t border-[#dedbd1] bg-white py-20 sm:py-24"
     >
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
-        {/* Section heading */}
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#8b5cf6]">
-            Everything you need
+      <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8">
+        <div className="max-w-2xl">
+          <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#4f46e5]">
+            What you can measure
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#181827] sm:text-4xl">
-            Understand Your Website Better
+          <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.03em] text-[#172033] sm:text-4xl">
+            Everything important,
+            <span className="block">in one audit.</span>
           </h2>
 
-          <p className="mt-4 text-sm leading-6 text-gray-500 sm:text-base">
-            Get a complete view of the areas that matter most for
+          <p className="mt-4 max-w-xl text-sm leading-6 text-[#6a6963] sm:text-base">
+            Get a clear view of the areas that matter most for
             website quality.
           </p>
         </div>
 
-        {/* Feature cards */}
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature) => {
             const Icon = feature.icon;
 
             return (
               <article
                 key={feature.title}
-                className="group rounded-2xl border border-[#eeeafd] bg-[#faf9ff] p-6 transition duration-300 hover:-translate-y-1 hover:border-[#ddd1ff] hover:bg-white hover:shadow-lg hover:shadow-[#7c3aed]/5"
+                className="rounded-2xl border border-[#dedbd1] bg-[#fbfaf5] p-6 transition duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-[0_12px_35px_rgba(23,32,51,0.07)]"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#f3e8ff] to-[#fce7f3] text-[#7c3aed]">
-                  <Icon size={21} />
+                <div
+                  className={`flex h-11 w-11 items-center justify-center rounded-xl ${feature.className}`}
+                >
+                  <Icon size={20} strokeWidth={1.9} />
                 </div>
 
-                <h3 className="mt-5 text-base font-bold text-[#181827]">
+                <h3 className="mt-5 text-base font-extrabold text-[#172033]">
                   {feature.title}
                 </h3>
 
-                <p className="mt-2 text-sm leading-6 text-gray-500">
+                <p className="mt-2 text-sm leading-6 text-[#6a6963]">
                   {feature.description}
                 </p>
               </article>

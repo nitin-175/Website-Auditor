@@ -1,14 +1,7 @@
-import {
-  CheckCircle2,
-  Gauge,
-  Zap,
-} from "lucide-react";
-
+import { CheckCircle2, Gauge, Zap } from "lucide-react";
 import MetricCard from "./MetricCard";
 
-function CoreWebVitalsPanel({
-  vitals,
-}) {
+function CoreWebVitalsPanel({ vitals }) {
   const vitalItems = [
     {
       key: "lcp",
@@ -32,26 +25,52 @@ function CoreWebVitalsPanel({
     },
   ];
 
+  const hasPoorMetric = vitalItems.some(
+    (metric) => metric.status === "poor"
+  );
+
+  const hasWarningMetric = vitalItems.some(
+    (metric) => metric.status === "needs-improvement"
+  );
+
+  const overallStatus = hasPoorMetric
+    ? "Needs Attention"
+    : hasWarningMetric
+      ? "Needs Improvement"
+      : "Good";
+
+  const statusClasses = hasPoorMetric
+    ? "bg-[#fff0ed] text-[#d65347]"
+    : hasWarningMetric
+      ? "bg-[#fff6df] text-[#a07819]"
+      : "bg-[#e9f8f5] text-[#168f82]";
+
   return (
-    <section className="rounded-2xl border border-[#eeeafd] bg-white p-5 shadow-sm sm:p-6">
-      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+    <section className="rounded-3xl border border-[#dedbd1] bg-white p-5 shadow-[0_10px_30px_rgba(23,32,51,0.04)] sm:p-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-lg font-bold text-[#181827]">
+          <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[#4f46e5]">
+            User experience
+          </p>
+
+          <h2 className="mt-1 text-xl font-extrabold tracking-[-0.03em] text-[#172033]">
             Core Web Vitals
           </h2>
 
-          <p className="mt-1 text-sm text-gray-500">
-            Key metrics that describe the user experience.
+          <p className="mt-1 text-sm text-[#77766f]">
+            Key metrics that describe the real-world experience of visitors.
           </p>
         </div>
 
-        <div className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-600 sm:mt-0">
+        <div
+          className={`inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-extrabold ${statusClasses}`}
+        >
           <CheckCircle2 size={13} />
-          Good
+          {overallStatus}
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {vitalItems.map((metric) => (
           <MetricCard
             key={metric.key}

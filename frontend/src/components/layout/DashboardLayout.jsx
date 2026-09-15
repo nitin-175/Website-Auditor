@@ -6,7 +6,7 @@ function DashboardLayout({ children, userName = "User" }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#faf9ff]">
+    <div className="min-h-screen bg-[#f6f4ed]">
       <Navbar
         variant="dashboard"
         userName={userName}
@@ -21,7 +21,7 @@ function DashboardLayout({ children, userName = "User" }) {
         />
 
         <main className="min-w-0 flex-1">
-          <div className="mx-auto w-full max-w p-5 sm:p-6 lg:p-8">
+          <div className="mx-auto w-full max-w-[1440px] p-5 sm:p-7 lg:p-9">
             {children}
           </div>
         </main>

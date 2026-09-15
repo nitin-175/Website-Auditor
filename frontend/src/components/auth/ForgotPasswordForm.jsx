@@ -1,3 +1,9 @@
+import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  Mail,
+} from "lucide-react";
 import { Link } from "react-router";
 import { useState } from "react";
 
@@ -25,23 +31,27 @@ function ForgotPasswordForm() {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <div className="text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[#f3e8ff] text-[#7c3aed]">
-          <span className="text-lg">?</span>
+    <div className="w-full max-w-[460px]">
+      <div className="mb-8">
+        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef0ff] text-[#4f46e5]">
+          <Mail size={21} strokeWidth={1.8} />
         </div>
 
-        <h1 className="mt-5 text-2xl font-bold tracking-tight text-[#181827]">
-          Forgot Password?
+        <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#4f46e5]">
+          Account recovery
+        </p>
+
+        <h1 className="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#172033] sm:text-4xl">
+          Forgot your password?
         </h1>
 
-        <p className="mt-2 text-sm leading-6 text-gray-500">
+        <p className="mt-3 max-w-md text-sm leading-6 text-[#6a6963] sm:text-base">
           Enter your email and we'll send you a link to reset
           your password.
         </p>
       </div>
 
-      <div className="mt-8 rounded-2xl border border-[#eeeafd] bg-white p-6 shadow-lg shadow-[#7c3aed]/5 sm:p-8">
+      <div className="rounded-[24px] border border-[#dedbd1] bg-white p-6 shadow-[0_14px_40px_rgba(23,32,51,0.06)] sm:p-8">
         {error && (
           <ErrorMessage
             message={error}
@@ -50,15 +60,23 @@ function ForgotPasswordForm() {
         )}
 
         {submitted ? (
-          <div className="rounded-xl bg-emerald-50 p-4 text-center">
-            <p className="text-sm font-semibold text-emerald-700">
-              Check your email
-            </p>
+          <div className="rounded-2xl border border-[#d9eee9] bg-[#f1faf8] p-5">
+            <div className="flex items-start gap-3">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#e0f5f0] text-[#168f82]">
+                <CheckCircle2 size={18} />
+              </div>
 
-            <p className="mt-1 text-xs leading-5 text-emerald-600">
-              If an account exists for this email, you'll receive
-              password reset instructions.
-            </p>
+              <div>
+                <p className="text-sm font-extrabold text-[#172033]">
+                  Check your email
+                </p>
+
+                <p className="mt-1 text-xs leading-5 text-[#5f706c]">
+                  If an account exists for this email, you'll receive
+                  password reset instructions.
+                </p>
+              </div>
+            </div>
           </div>
         ) : (
           <form
@@ -83,17 +101,21 @@ function ForgotPasswordForm() {
               fullWidth
               size="large"
             >
-              Send Reset Link
+              <span className="inline-flex items-center justify-center gap-2">
+                Send Reset Link
+                <ArrowRight size={16} />
+              </span>
             </Button>
           </form>
         )}
 
-        <div className="mt-6 text-center">
+        <div className="mt-7 border-t border-[#e6e3da] pt-6 text-center">
           <Link
             to="/login"
-            className="text-sm font-semibold text-[#7c3aed] hover:text-[#6d28d9]"
+            className="inline-flex items-center gap-2 text-sm font-bold text-[#4f46e5] transition hover:text-[#3730a3]"
           >
-            ← Back to Sign In
+            <ArrowLeft size={15} />
+            Back to Sign In
           </Link>
         </div>
       </div>

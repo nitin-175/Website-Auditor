@@ -1,3 +1,4 @@
+import { ArrowRight, LockKeyhole, Mail, ShieldCheck } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -42,9 +43,7 @@ function LoginForm() {
       setLoading(true);
       setError("");
 
-     
-
-      
+      await login(formData);
 
       navigate(ROUTES.DASHBOARD);
     } catch (error) {
@@ -61,22 +60,27 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <div className="text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-[#7c3aed] to-[#db2777] text-white shadow-md">
-          <span className="text-lg font-bold">A</span>
+    <div className="w-full max-w-[460px]">
+      <div className="mb-8">
+        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef0ff] text-[#4f46e5]">
+          <LockKeyhole size={21} strokeWidth={1.8} />
         </div>
 
-        <h1 className="mt-5 text-2xl font-bold tracking-tight text-[#181827]">
-          Welcome Back
+        <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#4f46e5]">
+          Welcome back
+        </p>
+
+        <h1 className="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#172033] sm:text-4xl">
+          Sign in to AuditPro.
         </h1>
 
-        <p className="mt-2 text-sm text-gray-500">
-          Sign in to continue to your AuditPro account.
+        <p className="mt-3 max-w-md text-sm leading-6 text-[#6a6963] sm:text-base">
+          Build a healthier web. A calmer way to understand what
+          your site needs next.
         </p>
       </div>
 
-      <div className="mt-8 rounded-2xl border border-[#eeeafd] bg-white p-6 shadow-lg shadow-[#7c3aed]/5 sm:p-8">
+      <div className="rounded-[24px] border border-[#dedbd1] bg-white p-6 shadow-[0_14px_40px_rgba(23,32,51,0.06)] sm:p-8">
         {error && (
           <ErrorMessage
             message={error}
@@ -84,10 +88,7 @@ function LoginForm() {
           />
         )}
 
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-5"
-        >
+        <form onSubmit={handleSubmit} className="space-y-5">
           <Input
             label="Email"
             name="email"
@@ -112,7 +113,7 @@ function LoginForm() {
             <div className="mt-2 text-right">
               <Link
                 to="/forgot-password"
-                className="text-xs font-semibold text-[#7c3aed] hover:text-[#6d28d9]"
+                className="text-xs font-bold text-[#4f46e5] transition hover:text-[#3730a3]"
               >
                 Forgot password?
               </Link>
@@ -125,26 +126,39 @@ function LoginForm() {
             size="large"
             disabled={loading}
           >
-            {loading ? "Signing In..." : "Sign In"}
+            <span className="inline-flex items-center justify-center gap-2">
+              {loading ? "Signing In..." : "Sign In"}
+              {!loading && <ArrowRight size={16} />}
+            </span>
           </Button>
         </form>
 
-        <div className="my-6 flex items-center gap-3">
-          <div className="h-px flex-1 bg-[#eeeafd]" />
+        <div className="my-7 flex items-center gap-3">
+          <div className="h-px flex-1 bg-[#e3e0d7]" />
 
-          <span className="text-xs text-gray-400">
-            OR
+          <span className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9b9991]">
+            Secure access
           </span>
 
-          <div className="h-px flex-1 bg-[#eeeafd]" />
+          <div className="h-px flex-1 bg-[#e3e0d7]" />
         </div>
 
-        <p className="text-center text-sm text-gray-500">
-          Don't have an account?{" "}
+        <div className="flex items-start gap-3 rounded-xl border border-[#e0eee9] bg-[#f3faf8] p-3.5">
+          <ShieldCheck
+            size={17}
+            className="mt-0.5 shrink-0 text-[#168f82]"
+          />
 
+          <p className="text-xs leading-5 text-[#5f706c]">
+            Your account is protected with secure authentication.
+          </p>
+        </div>
+
+        <p className="mt-6 text-center text-sm text-[#6a6963]">
+          Don't have an account?{" "}
           <Link
             to="/register"
-            className="font-semibold text-[#7c3aed] hover:text-[#6d28d9]"
+            className="font-bold text-[#4f46e5] transition hover:text-[#3730a3]"
           >
             Create one
           </Link>
